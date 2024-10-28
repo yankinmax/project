@@ -6,11 +6,14 @@ from datetime import datetime
 from odoo import Command
 from odoo.tests import common
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 
 class ProjectTimesheetHolidaysContractCommon(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         # Creates 1 test company and a calendar for employees that
         # work part time. Then creates an employee per calendar (one
         # for the standard calendar and one for the one we created)
